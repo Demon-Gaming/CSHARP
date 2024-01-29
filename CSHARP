@@ -1,0 +1,100 @@
+using System;
+
+namespace Exercice8
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            float prix, total = 0;
+            char reponse;
+            int note = 0;
+
+            Console.Write("Avez-vous un prix à saisir ? (O/N) ");
+            reponse = Console.ReadKey().KeyChar;
+
+            while (reponse == 'O')
+            {
+                Console.Write("\nSaisissez le prix du produit (0 pour terminer) : ");
+                prix = float.Parse(Console.ReadLine());
+                total += prix;
+
+                float remise = 0;
+
+                if (total > 50)
+                {
+                    remise = 10;
+                }
+                total = total * (1 - remise / 100);
+                Console.WriteLine("Montant = " + total + " avec une remise de " + remise + "%.");
+
+                Console.Write("Avez-vous un prix à saisir ? (O/N) ");
+                reponse = Console.ReadKey().KeyChar;
+            }
+
+            Console.WriteLine("\nMontant total des prix qui ont été saisis = " + total);
+
+            Console.Write("Voulez-vous laisser une note pour nous permettre de connaître votre avis ? (O/N)");
+            reponse = Console.ReadKey().KeyChar;
+
+            if (reponse == 'O')
+            {
+                do
+                {
+                    Console.Write("\nMettez une note entre 1 et 20 : ");
+                    if (int.TryParse(Console.ReadLine(), out note) && (note >= 1 && note <= 20))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Note invalide. Veuillez entrer une note entre 1 et 20.");
+                    }
+                } while (true);
+
+                Console.WriteLine("Vous avez saisi la note : " + note);
+
+                
+                Console.Write("\nRecommanderiez-vous notre site à votre entourage ? (Oui/Non) : ");
+                string recommandation = Console.ReadLine();
+
+                if (string.Equals(recommandation, "Oui", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Nous vous remercions pour votre avis positif !");
+                }
+                else
+                {
+                    Console.WriteLine("Nous sommes désolés de ne pas avoir pu répondre à vos attentes.");
+                }
+                do
+                {
+                    Console.Write("\nVoulez-vous imprimer le reçu de vos achats ? (Oui/Non) ");
+                    recommandation = Console.ReadLine();
+                } while (!string.Equals(recommandation, "Oui", StringComparison.OrdinalIgnoreCase) &&
+                         !string.Equals(recommandation, "Non", StringComparison.OrdinalIgnoreCase));
+
+                if (string.Equals(recommandation, "Oui", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Le reçu a été imprimé ");
+                }
+                do
+                {
+                    Console.Write("\nSouhaitez-vous recevoir des mails de notre site web ? (Oui/Non) ");
+                    recommandation = Console.ReadLine();
+
+                } while (!string.Equals(recommandation, "Oui", StringComparison.OrdinalIgnoreCase) &&
+         !string.Equals(recommandation, "Non", StringComparison.OrdinalIgnoreCase));
+
+                if (string.Equals(recommandation, "Oui", StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("\nVous recevrez des mails de nos différentes mises à jour.");
+                }
+
+               
+
+
+                Console.WriteLine("\nMerci pour votre retour et à la prochaine !");
+            }
+        }
+    }
+}
